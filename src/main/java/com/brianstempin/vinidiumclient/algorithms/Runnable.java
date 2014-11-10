@@ -1,8 +1,8 @@
 package com.brianstempin.vinidiumclient.algorithms;
 
-import com.brianstempin.vinidiumclient.gamestates.SimpleGameState;
+import com.brianstempin.vinidiumclient.gamestates.CompleteGameState;
 
 public interface Runnable {
-	public void run(SimpleGameState gameState);
-	public void init(SimpleGameState gameState);
+	public void run(CompleteGameState gameState);
+	public void init(CompleteGameState gameState);
 }

@@ -1,11 +1,11 @@
 package com.brianstempin.vinidiumclient.algorithms;
 
-import com.brianstempin.vinidiumclient.gamestates.SimpleGameState;
+import com.brianstempin.vinidiumclient.gamestates.CompleteGameState;
 
-public class TilePathFinder extends Algorithm implements Runnable {
+public class TilePathFinder implements Runnable {
 
 	@Override
-	public void run(SimpleGameState gameState) {
+	public void run(CompleteGameState gameState) {
 		int xStart = gameState.getGameState().getHero().getPos().getX();
 		int yStart = gameState.getGameState().getHero().getPos().getY();
 
@@ -15,7 +15,7 @@ public class TilePathFinder extends Algorithm implements Runnable {
 		init(gameState);
 	}
 
-	public void init(SimpleGameState gameState) {
+	public void init(CompleteGameState gameState) {
 		
 	}
 }

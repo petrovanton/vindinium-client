@@ -1,16 +1,16 @@
 package com.brianstempin.vinidiumclient.algorithms;
 
-import com.brianstempin.vinidiumclient.gamestates.SimpleGameState;
+import com.brianstempin.vinidiumclient.gamestates.CompleteGameState;
 
-public class Dijkstra extends Algorithm implements Runnable {
+public class Dijkstra implements Runnable {
 
 	@Override
-	public void run(SimpleGameState gameState) {
+	public void run(CompleteGameState gameState) {
 		
 	}
 
 	@Override
-	public void init(SimpleGameState gameState) {
+	public void init(CompleteGameState gameState) {
 		// TODO Auto-generated method stub
 		
 	}

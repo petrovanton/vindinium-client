@@ -73,17 +73,8 @@ public class ShakspeareBotRunner implements Callable<GameState> {
                 logger.info("Taking turn " + gameState.getGame().getTurn());
                 BotMove direction = bot.move(gameState);
                 
-                /*System.out.println("Current game state: ");
-                System.out.println("Heroes: ");
-                for(Hero hero: gameState.getGame().getHeroes()){
-                	System.out.println(hero.getName());
-                	System.out.println(hero.getLife());
-                }
-                System.out.println("Move direction: " + direction.toString());*/
-                
                 Move move = new Move(apiKey.getKey(), direction.toString());
-
-
+                
                 HttpContent turn = new UrlEncodedContent(move);
                 HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
                 HttpResponse turnResponse = turnRequest.execute();

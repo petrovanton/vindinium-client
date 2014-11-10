@@ -1,7 +1,6 @@
 package com.brianstempin.vinidiumclient.gamestates;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 import com.brianstempin.vindiniumclient.dto.GameState;
@@ -12,14 +11,14 @@ import com.brianstempin.vinidiumclient.utils.Tavern;
 import com.brianstempin.vinidiumclient.utils.Tile;
 import com.google.gson.internal.Pair;
 
-public class SimpleGameState {
+public class CompleteGameState {
 	private Runnable algorithm;
 	private GameState gameState;
 	private HashMap<Pair<Integer, Integer>, Tile> tiles;
 	private ArrayList<Mine> mines;
 	private ArrayList<Tavern> taverns;
 
-	public SimpleGameState(GameState gameState) {
+	public CompleteGameState(GameState gameState) {
 		this.gameState = gameState;
 //		this.algorithm = new Dijkstra();
 		this.algorithm = new TilePathFinder();
