@@ -1,4 +1,4 @@
-package com.brianstempin.vinidiumclient.shakespeare;
+package com.brianstempin.vindiniumclient.shakespeare;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
 

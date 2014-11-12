@@ -1,14 +1,14 @@
-package com.brianstempin.vinidiumclient.shakespeare;
+package com.brianstempin.vindiniumclient.shakespeare;
 
 import java.util.concurrent.Callable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.brianstempin.vindiniumclient.bot.BotMove;
+import com.brianstempin.vindiniumclient.algorithms.TilePathFinder;
+import com.brianstempin.vindiniumclient.decisioners.Decisioner;
 import com.brianstempin.vindiniumclient.dto.ApiKey;
 import com.brianstempin.vindiniumclient.dto.GameState;
-import com.brianstempin.vindiniumclient.dto.Move;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequest;
@@ -22,7 +22,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.gson.GsonFactory;
 
-public class ShakspeareBotRunner implements Callable<GameState> {
+public class ShakespeareBotRunner implements Callable<GameState> {
 	private static final HttpTransport HTTP_TRANSPORT = new ApacheHttpTransport();
     private static final JsonFactory JSON_FACTORY = new GsonFactory();
     private static final HttpRequestFactory REQUEST_FACTORY =
@@ -32,13 +32,13 @@ public class ShakspeareBotRunner implements Callable<GameState> {
                     request.setParser(new JsonObjectParser(JSON_FACTORY));
                 }
             });
-    private static final Logger logger = LogManager.getLogger(ShakspeareBotRunner.class);
+    private static final Logger logger = LogManager.getLogger(ShakespeareBotRunner.class);
 
     private final ApiKey apiKey;
     private final GenericUrl gameUrl;
-    private final ShakspeareBot bot;
+    private final ShakespeareBot bot;
 
-    public ShakspeareBotRunner(ApiKey apiKey, GenericUrl gameUrl, ShakspeareBot bot) {
+    public ShakespeareBotRunner(ApiKey apiKey, GenericUrl gameUrl, ShakespeareBot bot) {
         this.apiKey = apiKey;
         this.gameUrl = gameUrl;
         this.bot = bot;
@@ -66,20 +66,20 @@ public class ShakspeareBotRunner implements Callable<GameState> {
             System.out.println(gameState.getViewUrl());
             System.out.println("--------------------------------");
 
-            
+            this.bot.setDecisioner(new Decisioner(new TilePathFinder(), gameState));
             
             // Game loop
             while (!gameState.getGame().isFinished() && !gameState.getHero().isCrashed()) {
-                logger.info("Taking turn " + gameState.getGame().getTurn());
-                BotMove direction = bot.move(gameState);
-                
-                Move move = new Move(apiKey.getKey(), direction.toString());
-                
-                HttpContent turn = new UrlEncodedContent(move);
-                HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
-                HttpResponse turnResponse = turnRequest.execute();
-
-                gameState = turnResponse.parseAs(GameState.class);
+//                logger.info("Taking turn " + gameState.getGame().getTurn());
+//                BotMove direction = bot.move(gameState);
+//                
+//                Move move = new Move(apiKey.getKey(), direction.toString());
+//                
+//                HttpContent turn = new UrlEncodedContent(move);
+//                HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
+//                HttpResponse turnResponse = turnRequest.execute();
+//
+//                gameState = turnResponse.parseAs(GameState.class);
             }
 
         } catch (Exception e) {

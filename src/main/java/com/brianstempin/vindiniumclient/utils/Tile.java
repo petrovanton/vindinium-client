@@ -1,4 +1,4 @@
-package com.brianstempin.vinidiumclient.utils;
+package com.brianstempin.vindiniumclient.utils;
 
 import java.util.ArrayList;
 
@@ -7,15 +7,16 @@ public class Tile {
 	private int y;
 	private int weight;
 	private Tile pi;
+	private TileType type;
 	private boolean visited;
-	private boolean pathable;
 	private ArrayList<Tile> adjacentTiles;
 
-	public Tile(int x, int y) {
+	public Tile(int x, int y, TileType type) {
 		this.x = x;
 		this.y = y;
 		this.pi = null;
 		this.weight = 0;
+		this.type = type;
 		this.visited = false;
 		this.adjacentTiles = new ArrayList<Tile>();
 	}
@@ -54,6 +55,14 @@ public class Tile {
 	
 	public void setNotVisited() {
 		this.visited = false;
+	}
+	
+	public TileType getType() {
+		return type;
+	}
+
+	public void setType(TileType type) {
+		this.type = type;
 	}
 
 	public ArrayList<Tile> getAdjacentTiles() {

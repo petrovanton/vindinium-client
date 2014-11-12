@@ -1,4 +1,4 @@
-package com.brianstempin.vinidiumclient.utils;
+package com.brianstempin.vindiniumclient.utils;
 
 public abstract class GameObject {
 	private int x;

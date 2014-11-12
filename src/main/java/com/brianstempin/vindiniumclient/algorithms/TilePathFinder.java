@@ -1,6 +1,6 @@
-package com.brianstempin.vinidiumclient.algorithms;
+package com.brianstempin.vindiniumclient.algorithms;
 
-import com.brianstempin.vinidiumclient.gamestates.CompleteGameState;
+import com.brianstempin.vindiniumclient.gamestates.CompleteGameState;
 
 public class TilePathFinder implements Runnable {
 

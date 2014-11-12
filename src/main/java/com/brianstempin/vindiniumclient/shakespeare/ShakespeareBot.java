@@ -1,13 +1,21 @@
-package com.brianstempin.vinidiumclient.shakespeare;
+package com.brianstempin.vindiniumclient.shakespeare;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
+import com.brianstempin.vindiniumclient.decisioners.Decisioner;
 import com.brianstempin.vindiniumclient.dto.GameState;
-import com.brianstempin.vinidiumclient.decisioners.Decisioner;
 
-public class ShakspeareBot implements Movable {
+public class ShakespeareBot implements Movable {
 	private Decisioner decisioner;
 	
-	public ShakspeareBot(Decisioner decisioner) {
+	public ShakespeareBot() {
+		this.decisioner = null;
+	}
+
+	public Decisioner getDecisioner() {
+		return decisioner;
+	}
+
+	public void setDecisioner(Decisioner decisioner) {
 		this.decisioner = decisioner;
 	}
 

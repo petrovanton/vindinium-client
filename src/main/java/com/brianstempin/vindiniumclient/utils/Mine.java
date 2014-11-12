@@ -1,4 +1,4 @@
-package com.brianstempin.vinidiumclient.utils;
+package com.brianstempin.vindiniumclient.utils;
 
 public class Mine extends GameObject {
 	private boolean ownerMe;

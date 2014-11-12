@@ -1,17 +1,17 @@
-package com.brianstempin.vinidiumclient.decisioners;
+package com.brianstempin.vindiniumclient.decisioners;
 
+import com.brianstempin.vindiniumclient.algorithms.Runnable;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.dto.GameState;
-import com.brianstempin.vinidiumclient.algorithms.Runnable;
-import com.brianstempin.vinidiumclient.gamestates.CompleteGameState;
+import com.brianstempin.vindiniumclient.gamestates.CompleteGameState;
 
 public class Decisioner {
 	private Runnable algorithm;
-	private CompleteGameState completeGameState;
+	private final CompleteGameState completeGameState;
 	
-	public Decisioner(Runnable algorithm, CompleteGameState gameState) {
+	public Decisioner(Runnable algorithm, GameState gameState) {
 		this.algorithm = algorithm;
-		this.completeGameState = gameState;
+		this.completeGameState = new CompleteGameState(gameState);
 	}
 	
 	public BotMove takeDecision() {

@@ -1,4 +1,4 @@
-package com.brianstempin.vinidiumclient.utils;
+package com.brianstempin.vindiniumclient.utils;
 
 public class Tavern extends GameObject {
 

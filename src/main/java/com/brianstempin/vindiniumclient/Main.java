@@ -8,8 +8,8 @@ import com.brianstempin.vindiniumclient.bot.advanced.AdvancedBotRunner;
 import com.brianstempin.vindiniumclient.bot.simple.SimpleBot;
 import com.brianstempin.vindiniumclient.bot.simple.SimpleBotRunner;
 import com.brianstempin.vindiniumclient.dto.ApiKey;
-import com.brianstempin.vinidiumclient.shakespeare.ShakspeareBot;
-import com.brianstempin.vinidiumclient.shakespeare.ShakspeareBotRunner;
+import com.brianstempin.vindiniumclient.shakespeare.ShakespeareBot;
+import com.brianstempin.vindiniumclient.shakespeare.ShakespeareBotRunner;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -52,7 +52,7 @@ public class Main {
                 runAdvancedBot(key, gameUrl, botClass);
                 break;
             case "shakespeare":
-            	runSheakspeareBot(key, gameUrl, botClass);
+            	runShakespeareBot(key, gameUrl, botClass);
                 break;
             default:
                 throw new RuntimeException("The bot type must be simple or advanced and must match the type of the bot.");
@@ -60,12 +60,12 @@ public class Main {
     }
     
     
-    private static void runSheakspeareBot(String key, GenericUrl gameUrl, String botClass) throws Exception {
+    private static void runShakespeareBot(String key, GenericUrl gameUrl, String botClass) throws Exception {
     	Class<?> clazz = Class.forName(botClass);
-        Class<? extends ShakspeareBot> botClazz = clazz.asSubclass(ShakspeareBot.class);
-        ShakspeareBot bot = botClazz.newInstance();
+        Class<? extends ShakespeareBot> botClazz = clazz.asSubclass(ShakespeareBot.class);
+        ShakespeareBot bot = botClazz.newInstance();
         ApiKey apiKey = new ApiKey(key);
-        ShakspeareBotRunner runner = new ShakspeareBotRunner(apiKey, gameUrl, bot);
+        ShakespeareBotRunner runner = new ShakespeareBotRunner(apiKey, gameUrl, bot);
         runner.call();
 	}
 
