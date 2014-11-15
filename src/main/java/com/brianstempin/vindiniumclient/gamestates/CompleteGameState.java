@@ -120,6 +120,7 @@ public class CompleteGameState {
 		
 		System.out.println();
 		System.out.println("Done.");
+		System.out.println();
 		
 //		for(Tile tile : tiles.values()){
 //			Pair<Integer, Integer> leftTilePos  = new Pair<Integer, Integer>(tile.getX()-1, tile.getY());
