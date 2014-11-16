@@ -3,30 +3,24 @@ package com.brianstempin.vindiniumclient.utils;
 import java.util.ArrayList;
 
 public class Tile {
-	private int x;
-	private int y;
 	private int weight;
+	private Pos pos;
 	private Tile pi;
 	private TileType type;
 	private boolean visited;
 	private ArrayList<Tile> adjacentTiles;
 
 	public Tile(int x, int y, TileType type) {
-		this.x = x;
-		this.y = y;
 		this.pi = null;
+		this.pos = new Pos(x, y);
 		this.weight = 0;
 		this.type = type;
 		this.visited = false;
 		this.adjacentTiles = new ArrayList<Tile>();
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
+	public Pos getPosition (){
+		return pos;
 	}
 
 	public int getWeight() {

@@ -1,16 +1,15 @@
 package com.brianstempin.vindiniumclient.algorithms;
 
-import com.brianstempin.vindiniumclient.gamestates.CompleteGameState;
+import com.brianstempin.vindiniumclient.utils.Tile;
 
 public class Dijkstra implements Runnable {
-
 	@Override
-	public void run(CompleteGameState gameState) {
+	public void run(Tile start) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void init(CompleteGameState gameState) {
+	public void init() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -18,5 +17,4 @@ public class Dijkstra implements Runnable {
 	private void relax() {
 		
 	}
-
 }

@@ -1,8 +1,7 @@
 package com.brianstempin.vindiniumclient.algorithms;
 
-import com.brianstempin.vindiniumclient.gamestates.CompleteGameState;
+import com.brianstempin.vindiniumclient.utils.Tile;
 
 public interface Runnable {
-	public void run(CompleteGameState gameState);
-	public void init(CompleteGameState gameState);
+	public void run(Tile start);
 }

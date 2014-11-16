@@ -66,7 +66,7 @@ public class ShakespeareBotRunner implements Callable<GameState> {
             System.out.println(gameState.getViewUrl());
             System.out.println("--------------------------------");
 
-            this.bot.setDecisioner(new Decisioner(new TilePathFinder(), gameState));
+            bot.setDecisioner(new Decisioner(new TilePathFinder(), gameState));
             
             // Game loop
             while (!gameState.getGame().isFinished() && !gameState.getHero().isCrashed()) {

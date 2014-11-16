@@ -2,6 +2,9 @@ package com.brianstempin.vindiniumclient.gamestates;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.brianstempin.vindiniumclient.utils.Mine;
 import com.brianstempin.vindiniumclient.utils.Tavern;
@@ -14,6 +17,7 @@ public class CompleteGameState {
 	private ArrayList<ArrayList<Tile>> abstractBoard;
 	private ArrayList<Mine> mines;
 	private ArrayList<Tavern> taverns;
+	private static final Logger logger = LogManager.getLogger(CompleteGameState.class);
 
 	public CompleteGameState(GameState gameState) {
 		this.gameState = gameState;
@@ -90,12 +94,11 @@ public class CompleteGameState {
 			
 			if(y >= size){
 				y = 0;
-				System.out.println("New line..");
 				x++;
 			}
 		}
 		
-		System.out.println("Parsed. Representing board..");
+		System.out.println("Parsed. Representing the board..");
 		
 		for (ArrayList<Tile> arrayList : abstractBoard) {
 			System.out.println();
@@ -121,6 +124,32 @@ public class CompleteGameState {
 		System.out.println();
 		System.out.println("Done.");
 		System.out.println();
+		
+		for (int row = 0; row < abstractBoard.size(); row++) {
+			ArrayList<Tile> tilesRow = abstractBoard.get(row);
+			for (int col = 0; col < tilesRow.size(); col++) {
+				Tile tile = tilesRow.get(col);
+				x = tile.getPosition().getX();
+				y = tile.getPosition().getY();
+				
+				if (!tile.getType().equals(TileType.BLOCKER) && (x-1) >= 0 && !abstractBoard.get(row-1).get(col).getType().equals(TileType.BLOCKER)){
+					tile.addAdjacentTile(abstractBoard.get(row-1).get(col));
+					logger.info("Adding tile [" + (x-1) + ";" + y + "] to the tile [" + x + ";" + y + "]");
+				}
+				if (!tile.getType().equals(TileType.BLOCKER) && (x+1) < size && !abstractBoard.get(row+1).get(col).getType().equals(TileType.BLOCKER)){
+					tile.addAdjacentTile(abstractBoard.get(row+1).get(col));
+					logger.info("Adding tile [" + (x+1) + ";" + y + "] to the tile [" + x + ";" + y + "]");
+				}
+				if (!tile.getType().equals(TileType.BLOCKER) && (y-1) >= 0 && !abstractBoard.get(row).get(col-1).getType().equals(TileType.BLOCKER)){
+					tile.addAdjacentTile(abstractBoard.get(row).get(col-1));
+					logger.info("Adding tile [" + x + ";" + (y-1) + "] to the tile [" + x + ";" + y + "]");
+				}
+				if (!tile.getType().equals(TileType.BLOCKER) && (y+1) < size && !abstractBoard.get(row).get(col+1).getType().equals(TileType.BLOCKER)){
+					tile.addAdjacentTile(abstractBoard.get(row).get(col+1));
+					logger.info("Adding tile [" + x + ";" + (y+1) + "] to the tile [" + x + ";" + y + "]");
+				}
+			}
+		}
 		
 //		for(Tile tile : tiles.values()){
 //			Pair<Integer, Integer> leftTilePos  = new Pair<Integer, Integer>(tile.getX()-1, tile.getY());
