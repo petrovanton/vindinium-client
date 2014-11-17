@@ -4,21 +4,31 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import com.brianstempin.vindiniumclient.utils.Tile;
+import com.brianstempin.vindiniumclient.utils.TileType;
 
 public class TilePathFinder implements Runnable {
 
 	@Override
-	public void run(Tile start) {
+	public ArrayDeque<Tile> run(Tile start, Tile end) {
 		Tile currentTile = start;
 		ArrayList<Tile> visited = new ArrayList<Tile>();
+		ArrayDeque<Tile> path = new ArrayDeque<Tile>();
 		ArrayDeque<Tile> queue = new ArrayDeque<Tile>();
 		
-		while (currentTile != null && !start.equals(currentTile)) {
+		currentTile.setPi(null);
+		currentTile.setWeight(0);
+		
+		while (currentTile != null && !end.equals(currentTile)) {
 			for (Tile tile : currentTile.getAdjacentTiles()) {
 				if (!tile.isVisited()) {
-					queue.add(tile);
-					tile.setWeight(tile.getWeight()+1);
+					if (tile.getType().equals(TileType.HERO)) {
+//						continue;
+					}
+					
+					tile.setPi(currentTile);
+					tile.setWeight(currentTile.getWeight()+1);
 					tile.setVisited();
+					queue.add(tile);
 					visited.add(tile);
 				}
 			}
@@ -26,8 +36,15 @@ public class TilePathFinder implements Runnable {
 			currentTile = queue.pollFirst();
 		}
 		
+		while (currentTile != null) {
+			currentTile = currentTile.getPi();
+			path.addFirst(currentTile);
+		}
+		
 		for (Tile tile : visited) {
 			tile.setNotVisited();
 		}
+		
+		return path;
 	}
 }

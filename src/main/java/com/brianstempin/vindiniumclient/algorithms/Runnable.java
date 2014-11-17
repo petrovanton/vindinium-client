@@ -1,7 +1,9 @@
 package com.brianstempin.vindiniumclient.algorithms;
 
+import java.util.ArrayDeque;
+
 import com.brianstempin.vindiniumclient.utils.Tile;
 
 public interface Runnable {
-	public void run(Tile start);
+	public ArrayDeque<Tile> run(Tile start, Tile end);
 }

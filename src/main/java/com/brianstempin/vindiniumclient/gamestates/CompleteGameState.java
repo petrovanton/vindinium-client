@@ -6,12 +6,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.brianstempin.vindiniumclient.dto.GameState;
+import com.brianstempin.vindiniumclient.utils.Hero;
 import com.brianstempin.vindiniumclient.utils.Mine;
 import com.brianstempin.vindiniumclient.utils.Tavern;
 import com.brianstempin.vindiniumclient.utils.Tile;
 import com.brianstempin.vindiniumclient.utils.TileType;
 
 public class CompleteGameState {
+	private Hero myHero;
 	private GameState gameState;
 //	private HashMap<Pair<Integer, Integer>, Tile> tiles;
 	private ArrayList<ArrayList<Tile>> abstractBoard;
@@ -20,6 +22,7 @@ public class CompleteGameState {
 	private static final Logger logger = LogManager.getLogger(CompleteGameState.class);
 
 	public CompleteGameState(GameState gameState) {
+		this.myHero = null;
 		this.gameState = gameState;
 //		this.tiles = new HashMap<Pair<Integer, Integer>, Tile>();
 		this.mines = new ArrayList<Mine>();
@@ -33,6 +36,10 @@ public class CompleteGameState {
 		parseBoard();
 	}
 	
+	public Hero getMyHero() {
+		return myHero;
+	}
+
 	public GameState getGameState() {
 		return gameState;
 	}
@@ -54,6 +61,7 @@ public class CompleteGameState {
 	}
 
 	private void parseBoard() {
+		Tile tile;
 		int x = 0;
 		int y = 0;
 		int size = gameState.getGame().getBoard().getSize();
@@ -75,15 +83,22 @@ public class CompleteGameState {
 				abstractBoard.get(x).add(new Tile(x, y, TileType.BLOCKER));
 			}
 			else if("$".equals(String.valueOf(tileType))){
-				mines.add(new Mine(x, y));
-				abstractBoard.get(x).add(new Tile(x, y, TileType.MINE));
+				tile = new Tile(x, y, TileType.MINE);
+				abstractBoard.get(x).add(tile);
+				mines.add(new Mine(x, y, tile));
 			}
 			else if("[".equals(String.valueOf(tileType))){
-				taverns.add(new Tavern(x, y));
-				abstractBoard.get(x).add(new Tile(x, y, TileType.TAVERN));
+				tile = new Tile(x, y, TileType.TAVERN);
+				abstractBoard.get(x).add(tile);
+				taverns.add(new Tavern(x, y, tile));
 			}
 			else if("@".equals(String.valueOf(tileType))){
-				abstractBoard.get(x).add(new Tile(x, y, TileType.HERO));
+				tile = new Tile(x, y, TileType.HERO);
+				abstractBoard.get(x).add(tile);
+				if (String.valueOf(board.charAt(i+1)).equals(String.valueOf(gameState.getHero().getId()))) {
+					logger.info("My hero has id: " + gameState.getHero().getId());
+					myHero = new Hero(x, y, tile);
+				}
 			}
 			else {
 //				System.out.print("[" + x + ";" + y +"]");
@@ -98,7 +113,7 @@ public class CompleteGameState {
 			}
 		}
 		
-		System.out.println("Parsed. Representing the board..");
+		/*System.out.println("Parsed. Representing the board..");
 		
 		for (ArrayList<Tile> arrayList : abstractBoard) {
 			System.out.println();
@@ -123,12 +138,12 @@ public class CompleteGameState {
 		
 		System.out.println();
 		System.out.println("Done.");
-		System.out.println();
+		System.out.println();*/
 		
 		for (int row = 0; row < abstractBoard.size(); row++) {
 			ArrayList<Tile> tilesRow = abstractBoard.get(row);
 			for (int col = 0; col < tilesRow.size(); col++) {
-				Tile tile = tilesRow.get(col);
+				tile = tilesRow.get(col);
 				x = tile.getPosition().getX();
 				y = tile.getPosition().getY();
 				

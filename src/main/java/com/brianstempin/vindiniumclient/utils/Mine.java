@@ -3,8 +3,8 @@ package com.brianstempin.vindiniumclient.utils;
 public class Mine extends GameObject {
 	private boolean ownerMe;
 	
-	public Mine(int x, int y) {
-		super(x, y);
+	public Mine(int x, int y, Tile tile) {
+		super(x, y, tile);
 		this.ownerMe = false;
 	}
 
